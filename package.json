@@ -5,6 +5,10 @@
   "version": "0.0.1",
   "publisher": "aks1727",
   "icon": "img/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aks1727/VaiaksCPRunnerExtension_for_vscode.git"
+  },
   "engines": {
     "vscode": "^1.125.0"
   },
