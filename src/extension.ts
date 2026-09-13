@@ -51,11 +51,17 @@ export function activate(context: vscode.ExtensionContext) {
     cpOutputChannel.appendLine("[INFO] Vaiaksh CP Runner is now active.");
     console.log("Vaiaksh CP Runner is now active.");
 
-    shouldAutoOpenUI().then((shouldOpen) => {
-        if (shouldOpen) {
-            CPRunnerPanel.createOrShow();
-        }
-    });
+    const config = vscode.workspace.getConfiguration("vaiaksh-cp-runner");
+    const enableAutoOpen = config.get<boolean>("autoOpenUI", false);
+
+    if (enableAutoOpen) {
+        shouldAutoOpenUI().then((shouldOpen) => {
+            if (shouldOpen) {
+                CPRunnerPanel.createOrShow();
+            }
+        });
+    }
+
 
     let runCommand = vscode.commands.registerCommand(
         "vaiaksh-cp-runner.run",

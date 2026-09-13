@@ -1,54 +1,53 @@
 # Vaiaksh CP Runner 
-**Vaiaksh CP Runner** is a lightning-fast competitive programming runner for Visual Studio Code, built specifically for C++, Java, and Python. It provides an integrated side panel with custom input boxes, live output rendering, memory/time tracking, and built-in Time Limit Exceeded (TLE) protection.
+**Vaiaksh CP Runner** is a lightweight, low-latency competitive programming runner for Visual Studio Code, engineered for C++, Java, and Python. It provides an integrated side panel with persistent custom input, live output rendering, execution metrics (time/memory), and automated Time Limit Exceeded (TLE) safeguards.
 
 ---
 
 ## Features
 
-* **Multi-Language Support**: Seamlessly compiles and executes **C++** (`g++`), **Java** (`javac`/`java`), and **Python** (`python3`).
-* **Interactive Side Panel UI**: Opens a dedicated split-view panel displaying separate **Input** and **Output** boxes.
-* **TLE Protection**: Automatically terminates infinite loops or long-running executions based on a configurable time limit, complete with warnings and status notifications.
-* **Execution Metrics**: Displays execution time in milliseconds, peak memory consumption in MB, and process exit codes.
-* **Performance Optimized**: Built-in output truncation to safely handle massive or infinite streams without freezing or lagging the VS Code editor.
+* **Multi-Language Support**: Compiles and runs **C++** (`g++`), **Java** (`javac`/`java`), and **Python** (`python3`) with zero manual boilerplate configuration.
+* **Interactive Side Panel**: Dedicated side-by-side view with custom input buffering and formatted output streaming.
+* **TLE Protection**: Configurable execution timeouts kill hanging processes or infinite loops via `SIGKILL` without locking up your editor.
+* **Execution Metrics**: Accurate tracking of runtime in milliseconds, peak resident memory usage (via `/usr/bin/time`), and exit codes.
+* **Output Buffer Safeguard**: Automatic output truncation past 50,000 characters to protect VS Code from UI freezing during infinite print loops.
 
 ---
 
 ## Requirements
 
-Ensure the corresponding compiler/interpreter runtimes are installed and added to your system's `PATH`:
-* **C++**: GCC / MinGW (`g++`)
-* **Java**: Java Development Kit (`JDK`)
-* **Python**: Python 3.x
+Ensure runtimes are available in your system `PATH`:
+* **C++**: `g++` (GCC / MinGW)
+* **Java**: `javac` and `java` (JDK 8+)
+* **Python**: `python3` (or `python` on Windows)
 
 ---
 
 ## Extension Settings
 
-This extension contributes the following settings under the `vaiaksh-cp-runner` configuration namespace:
+All configurations live under the `vaiaksh-cp-runner` namespace:
 
-* `vaiaksh-cp-runner.panelWidth`: Percentage of screen width the CP Runner UI side panel should occupy (default: `30`, min: `10`, max: `90`).
-* `vaiaksh-cp-runner.timeout`: Maximum execution time in milliseconds before automatically terminating the process for TLE protection (default: `5000`).
-
----
-
-## Keyboard Shortcuts
-
-* **Run Code**: `Ctrl + Enter` (Windows/Linux) or `Cmd + Enter` (macOS) while focused on an editor.
-* **Open Panel**: `Ctrl + Shift + C` (Windows/Linux) or `Cmd + Shift + C` (macOS).
+* `vaiaksh-cp-runner.autoOpenUI`: Automatically open the CP Runner side panel on workspace activation when CP files are detected (default: `false`).
+* `vaiaksh-cp-runner.panelWidth`: Percentage of the screen width allocated to the runner panel (default: `30`, min: `10`, max: `90`).
+* `vaiaksh-cp-runner.timeout`: Process execution timeout in milliseconds before triggering TLE termination (default: `5000`).
 
 ---
 
-## Known Issues
+## Keybindings
 
-* On Linux/macOS, peak memory tracking relies on `/usr/bin/time`. If unavailable, it seamlessly falls back to direct execution mode.
+* **Run Code**: `Ctrl + Enter` (Windows/Linux) / `Cmd + Enter` (macOS)
+* **Toggle Panel**: `Ctrl + Shift + C` (Windows/Linux) / `Cmd + Shift + C` (macOS)
 
 ---
 
 ## Release Notes
 
+### 0.0.2
+
+* Added `vaiaksh-cp-runner.autoOpenUI` configuration toggle to prevent unwanted webview auto-spawning on workspace launch.
+* Aligned ESLint dependencies and cleaned up peer dependency constraints.
+
 ### 0.0.1
 
-* Initial release of **Vaiaksh CP Runner**.
-* Added support for C++, Java, and Python execution.
-* Integrated custom side panel UI with TLE protection and memory/time metrics.
-* Added performance-optimized output scrolling and truncation.
+* Initial release.
+* C++, Java, and Python compilation and execution pipelines.
+* Split-panel webview with live metrics and output length capping.
