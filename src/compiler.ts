@@ -16,10 +16,14 @@ export function compileCpp(sourcePath: string): Promise<string> {
         compilerProcess.stderr.on('data', (data) => errorOutput += data.toString());
 
         compilerProcess.on('close', (code) => {
-            if (code === 0) resolve(outputPath);
-            else reject(new Error(`C++ Compilation failed:\n${errorOutput}`));
+            if (code === 0) {
+                resolve(outputPath);
+            }
+            else {
+                reject(new Error(`C++ Compilation failed:\n${errorOutput}`));
+            }
         });
-        
+
         compilerProcess.on('error', (err) => reject(new Error(`Failed to start g++. Is MinGW or GCC installed and in your PATH?\n${err.message}`)));
     });
 }
@@ -40,10 +44,14 @@ export function compileJava(sourcePath: string): Promise<JavaCompileResult> {
         compilerProcess.stderr.on('data', (data) => errorOutput += data.toString());
 
         compilerProcess.on('close', (code) => {
-            if (code === 0) resolve({ classDirectory: outDir, className });
-            else reject(new Error(`Java Compilation failed:\n${errorOutput}`));
+            if (code === 0) {
+                resolve({ classDirectory: outDir, className });
+            }
+            else {
+                reject(new Error(`Java Compilation failed:\n${errorOutput}`));
+            }
         });
-        
+
         compilerProcess.on('error', (err) => reject(new Error(`Failed to start javac. Is the JDK installed and in your PATH?\n${err.message}`)));
     });
 }
